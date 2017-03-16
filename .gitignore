@@ -1,2 +1,4 @@
 *.tmp
 build
+/ohtu-viikko1/.nb-gradle/
+/.nb-gradle/

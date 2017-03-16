@@ -31,6 +31,42 @@ public class VarastoTest {
     }
 
     @Test
+    public void molemmatKonstruktorinParametrit() {
+        Varasto varasto1 = new Varasto(10, 10);
+        Varasto varasto2 = new Varasto(-1, -1);
+        Varasto varasto3 = new Varasto(10, 12);
+        assertEquals(10, varasto1.getSaldo(), vertailuTarkkuus);
+        assertEquals(10, varasto1.getTilavuus(), vertailuTarkkuus);
+        assertEquals(0, varasto2.getSaldo(), vertailuTarkkuus);
+        assertEquals(0, varasto2.getTilavuus(), vertailuTarkkuus);
+        assertEquals(10, varasto3.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void konstruktoriNollaaNegatiivisen() {
+        Varasto varasto1 = new Varasto(-1);
+        assertEquals(0, varasto1.getTilavuus(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void negatiivinenLisays() {
+        varasto.lisaaVarastoon(-1);
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void yliLisaaminen() {
+        varasto.lisaaVarastoon(11);
+        assertEquals(varasto.getTilavuus(), varasto.getSaldo(), vertailuTarkkuus);
+
+    }
+
+    @Test
+    public void negaativinenPoistaminen() {
+        assertEquals(0, varasto.otaVarastosta(-1), vertailuTarkkuus);
+    }
+
+    @Test
     public void lisaysLisaaSaldoa() {
         varasto.lisaaVarastoon(8);
 
@@ -63,6 +99,17 @@ public class VarastoTest {
 
         // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
+    }
+
+    @Test
+    public void yliOttaminen() {
+        varasto.lisaaVarastoon(4);
+        assertEquals(4, varasto.otaVarastosta(10), vertailuTarkkuus);
+
+    }
+    @Test
+    public void toStringTest() {
+        assertEquals("saldo = 0.0, vielä tilaa 10.0", varasto.toString());
     }
 
 }
